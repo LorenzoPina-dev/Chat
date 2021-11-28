@@ -23,22 +23,23 @@ public class ThreadClient extends Thread{
     
     static DatagramSocket client;
     InetAddress address;
-    Condivisi c;
-    public ThreadClient(Condivisi c) throws SocketException, IOException {
-        client = new DatagramSocket(666);
-        this.c=c;
+    public ThreadClient() throws SocketException, IOException {
+        client = new DatagramSocket();
     }
     
     @Override
     public void run(){
         while(true)
         {
-            if(c.CiSonoPacchettiDaInviare())
-                try {
-                    Invia(c.PrendiPacchettoOut());
-                } catch (IOException ex) {
-                    Logger.getLogger(ThreadClient.class.getName()).log(Level.SEVERE, null, ex);
-                }   
+            try {
+                Pacchetto p=Condivisi.Instance().PrendiPacchettoOut();
+                if(p.scelta.equals("c"))
+                    Condivisi.Instance().setHoMandatoRichiestaDiConnessione(true);
+                if(p!=null)
+                    Invia(p);
+            } catch (IOException ex) {
+                Logger.getLogger(ThreadClient.class.getName()).log(Level.SEVERE, null, ex);
+            }   
         }
     }
     

@@ -21,10 +21,8 @@ public class ThreadServer extends Thread{
     
     static DatagramSocket server;
     InetAddress address;
-    Condivisi c;
     public ThreadServer(Condivisi c) throws SocketException, IOException {
         server = new DatagramSocket(666);
-        this.c=c;
     }
     
     @Override
@@ -34,7 +32,7 @@ public class ThreadServer extends Thread{
             try {
                 Pacchetto p=Ricevi();
                 p.address=address;
-                c.MettiPacchettoIn(p);
+                Condivisi.Instance().MettiPacchettoIn(p);
             } catch (IOException ex) {
                 Logger.getLogger(ThreadServer.class.getName()).log(Level.SEVERE, null, ex);
             }
