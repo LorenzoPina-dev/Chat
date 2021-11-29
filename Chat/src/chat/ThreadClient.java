@@ -33,10 +33,12 @@ public class ThreadClient extends Thread{
         {
             try {
                 Pacchetto p=Condivisi.Instance().PrendiPacchettoOut();
-                if(p.scelta.equals("c"))
-                    Condivisi.Instance().setHoMandatoRichiestaDiConnessione(true);
                 if(p!=null)
+                {
+                    if(p.scelta.equals("c"))
+                        Condivisi.Instance().setHoMandatoRichiestaDiConnessione(true);
                     Invia(p);
+                }
             } catch (IOException ex) {
                 Logger.getLogger(ThreadClient.class.getName()).log(Level.SEVERE, null, ex);
             }   
@@ -48,5 +50,6 @@ public class ThreadClient extends Thread{
         byte[] buf= m.ToCsv().getBytes();
         DatagramPacket p= new DatagramPacket(buf,buf.length, m.address, 12345);
         server.send(p);
+        System.out.println(m.ToCsv());
     }
 }

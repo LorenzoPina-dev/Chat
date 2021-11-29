@@ -5,9 +5,12 @@
  */
 package chat;
 
+import static java.lang.Thread.sleep;
 import java.net.InetAddress;
 import java.util.ArrayDeque;
 import java.util.Queue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,11 +19,13 @@ import java.util.Queue;
 public class Condivisi {
     Queue<Pacchetto> in;
     Queue<Pacchetto> out;
+    private Interfaccia i;
+
     private boolean miStoConnettendo;
     private InetAddress  connessioneAttule;
     boolean hoMandatoRichiestaDiConnessione;
     String mioNome,altroNome;
-    private Object sincronizzaIn,sincronizzaOut,sincronizzaConnessione,sincronizzaRichiesta;
+    private Object sincronizzaIn,sincronizzaOut,sincronizzaConnessione,sincronizzaRichiesta,Sincronizzagrafica;
     private static Condivisi instance=null;
     
     public static Condivisi Instance(){
@@ -36,9 +41,12 @@ public class Condivisi {
         sincronizzaIn=new Object();
         sincronizzaOut=new Object();
         sincronizzaRichiesta=new Object();
+        Sincronizzagrafica=new Object();
         altroNome="";
         mioNome="";
-        SettaStatoConnessione(StatoConnessione.DisConnesso);
+        connessioneAttule=null;
+        miStoConnettendo=false;
+        i=null;
     }
 
     
@@ -101,6 +109,7 @@ public class Condivisi {
         {
             if(s==StatoConnessione.Connesso)
             {
+                i.AnnullaVisibile(false);
                 connessioneAttule=address;
                 miStoConnettendo=false;
             }
@@ -111,6 +120,7 @@ public class Condivisi {
             }
             else if(s==StatoConnessione.DisConnesso)
             {
+                i.AnnullaVisibile(false);
                 connessioneAttule=null;
                 miStoConnettendo=false;
             }
@@ -131,6 +141,26 @@ public class Condivisi {
     public void setHoMandatoRichiestaDiConnessione(boolean hoMandatoRichiestaDiConnessione) {
         synchronized(sincronizzaRichiesta){
             this.hoMandatoRichiestaDiConnessione = hoMandatoRichiestaDiConnessione;
+        }
+    }
+    
+    public Interfaccia getI() {
+        synchronized(Sincronizzagrafica)
+        {
+            return i;
+        }
+    }
+
+    public void setI(Interfaccia i) {
+        while(i==null)
+            try {
+                sleep(1);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Condivisi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        synchronized(Sincronizzagrafica)
+        {
+            this.i = i;
         }
     }
 }

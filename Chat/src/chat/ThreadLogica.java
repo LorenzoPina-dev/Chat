@@ -6,6 +6,9 @@
 package chat;
 
 import java.net.InetAddress;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,7 +32,7 @@ public class ThreadLogica extends Thread{
                         StatoConnessione s= Condivisi.Instance().getStatoConnessione();
                         if(s==StatoConnessione.InAttessa)
                         { 
-                            Boolean ris=ChiediConferma(Condivisi.Instance().getConnessioneAttule(),daElaborare.address);
+                            Boolean ris=ChiediConferma(Condivisi.Instance().getConnessioneAttule(),daElaborare.address,daElaborare.dati);
                             if(ris)
                             {
                                 Condivisi.Instance().SettaStatoConnessione(StatoConnessione.InAttessa,daElaborare.address);
@@ -87,10 +90,16 @@ public class ThreadLogica extends Thread{
     }
 
     private void MostraMessaggio(String dati) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Condivisi.Instance().getI().AddMessaggio(dati);
+        
     }
 
-    private Boolean ChiediConferma(InetAddress connessioneAttule, InetAddress address) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private Boolean ChiediConferma(InetAddress connessioneAttule, InetAddress address,String nomeAltro) {
+        
+        int ris=JOptionPane.showConfirmDialog (null, "vuoi accettare la connessione di "+nomeAltro,"Information",JOptionPane.YES_NO_OPTION);
+        if(ris==JOptionPane.YES_OPTION)
+            return true;
+        return false;
+            
     }
 }
