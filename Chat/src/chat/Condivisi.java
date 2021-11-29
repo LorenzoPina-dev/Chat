@@ -89,7 +89,7 @@ public class Condivisi {
     public StatoConnessione getStatoConnessione(){
         synchronized(sincronizzaConnessione)
         {
-            if(connessioneAttule!=null)
+            if(connessioneAttule==null)
                 if(miStoConnettendo)
                     return StatoConnessione.InAttessa;  
                 else

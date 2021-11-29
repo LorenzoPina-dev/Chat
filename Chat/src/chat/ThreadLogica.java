@@ -56,7 +56,7 @@ public class ThreadLogica extends Thread{
                         Condivisi.Instance().altroNome="";
                         break;
                     case "m":
-                        if(Condivisi.Instance().getStatoConnessione()== StatoConnessione.Connesso  && Condivisi.Instance().getConnessioneAttule()==daElaborare.address)
+                        if(Condivisi.Instance().getStatoConnessione()== StatoConnessione.Connesso  && Condivisi.Instance().getConnessioneAttule().getHostAddress().equals(daElaborare.address.getHostAddress()))
                             MostraMessaggio(daElaborare.dati);
                         else
                             Invia(new Pacchetto("d",""),daElaborare.address);
