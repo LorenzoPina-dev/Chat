@@ -52,6 +52,7 @@ public class Interfaccia extends javax.swing.JFrame {
         Txtmessaggio = new javax.swing.JTextArea();
         TxtStatiConnessione = new javax.swing.JLabel();
         Annulla = new javax.swing.JButton();
+        TxtDestinatario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,46 +103,53 @@ public class Interfaccia extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(butInviaMess))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TxtIp, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(ButConnetti))
+                        .addComponent(ButConnetti)
+                        .addGap(18, 18, 18)
+                        .addComponent(TxtDestinatario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(83, 83, 83)
-                                    .addComponent(Disconnetti))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(TxtStatiConnessione, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(93, 93, 93)
-                                .addComponent(Annulla))
-                            .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                                .addComponent(butInviaMess))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGap(83, 83, 83)
+                                            .addComponent(Disconnetti))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addContainerGap()
+                                            .addComponent(TxtStatiConnessione, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(93, 93, 93)
+                                        .addComponent(Annulla))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 8, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButConnetti)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtIp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ButConnetti)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TxtIp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtDestinatario, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -168,6 +176,7 @@ public class Interfaccia extends javax.swing.JFrame {
         {
             Pacchetto p=new Pacchetto("m",Txtmessaggio.getText());
             p.address=Condivisi.Instance().getConnessioneAttule();
+            TxtMessaggi.setText(TxtMessaggi.getText()+"\r\n"+Condivisi.Instance().mioNome+":"+p.dati);
             Condivisi.Instance().MettiPacchettoOut(p);
             TxtIp.setText("");
         }
@@ -258,7 +267,15 @@ public class Interfaccia extends javax.swing.JFrame {
     {
          SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-               TxtMessaggi.setText(TxtMessaggi.getText()+"\r\n"+s);
+               TxtMessaggi.setText(TxtMessaggi.getText()+"\r\n"+Condivisi.Instance().altroNome+":"+s);
+            }
+        });
+    }
+    public void CambiaDestinatario(String s)
+    {
+         SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+               TxtDestinatario.setText(s);
             }
         });
     }
@@ -277,6 +294,7 @@ public class Interfaccia extends javax.swing.JFrame {
     private javax.swing.JButton Annulla;
     private javax.swing.JButton ButConnetti;
     private javax.swing.JButton Disconnetti;
+    private javax.swing.JLabel TxtDestinatario;
     private javax.swing.JTextField TxtIp;
     private javax.swing.JTextArea TxtMessaggi;
     private javax.swing.JLabel TxtStatiConnessione;

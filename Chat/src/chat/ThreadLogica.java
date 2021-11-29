@@ -73,6 +73,7 @@ public class ThreadLogica extends Thread{
                             if(Condivisi.Instance().getConnessioneAttule().getHostAddress().equals(daElaborare.address.getHostAddress()))//sono ancora disponibile ad instaurare la connessione
                             {
                                 Invia(new Pacchetto("y",""),daElaborare.address);
+                                Condivisi.Instance().altroNome=daElaborare.dati;
                                 Condivisi.Instance().SettaStatoConnessione(StatoConnessione.Connesso, daElaborare.address);
                             }
                             else

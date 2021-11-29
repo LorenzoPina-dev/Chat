@@ -112,6 +112,7 @@ public class Condivisi {
                 i.AnnullaVisibile(false);
                 connessioneAttule=address;
                 miStoConnettendo=false;
+                i.CambiaDestinatario(altroNome);
             }
             else if(s==StatoConnessione.InAttessa)
             {
@@ -123,6 +124,8 @@ public class Condivisi {
                 i.AnnullaVisibile(false);
                 connessioneAttule=null;
                 miStoConnettendo=false;
+                altroNome="";
+                i.CambiaDestinatario(altroNome);
             }
         } 
     }
