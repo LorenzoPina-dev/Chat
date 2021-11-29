@@ -44,9 +44,15 @@ public class ThreadLogica extends Thread{
                         }
                         else if(s==StatoConnessione.DisConnesso)
                         {
+                            Boolean ris=ChiediConferma(Condivisi.Instance().getConnessioneAttule(),daElaborare.address,daElaborare.dati);
+                            if(ris)
+                            { 
                             Invia(new Pacchetto("y",Condivisi.Instance().mioNome),daElaborare.address);
                             Condivisi.Instance().altroNome=daElaborare.dati;
                             Condivisi.Instance().SettaStatoConnessione(StatoConnessione.InAttessa,daElaborare.address);
+                            }
+                            else
+                                Invia(new Pacchetto("n",""),daElaborare.address);
                         }
                         else
                             Invia(new Pacchetto("n",""),daElaborare.address);
@@ -64,7 +70,7 @@ public class ThreadLogica extends Thread{
                     case "y":
                         StatoConnessione scon=Condivisi.Instance().getStatoConnessione();
                         if(Condivisi.Instance().isHoMandatoRichiestaDiConnessione())    //sono il mittente
-                            if(Condivisi.Instance().getConnessioneAttule()==daElaborare.address)//sono ancora disponibile ad instaurare la connessione
+                            if(Condivisi.Instance().getConnessioneAttule().getHostAddress().equals(daElaborare.address.getHostAddress()))//sono ancora disponibile ad instaurare la connessione
                             {
                                 Invia(new Pacchetto("y",""),daElaborare.address);
                                 Condivisi.Instance().SettaStatoConnessione(StatoConnessione.Connesso, daElaborare.address);

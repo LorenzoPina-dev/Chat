@@ -188,7 +188,7 @@ public class Interfaccia extends javax.swing.JFrame {
         try {
             p.address=InetAddress.getByName(TxtIp.getText());
             Condivisi.Instance().MettiPacchettoOut(p);
-            Condivisi.Instance().SettaStatoConnessione(StatoConnessione.InAttessa );
+            Condivisi.Instance().SettaStatoConnessione(StatoConnessione.InAttessa,p.address);
             Annulla.setVisible(true);
             TxtStatiConnessione.setText("in connessione con "+TxtIp.getText());
             TxtIp.setText("");

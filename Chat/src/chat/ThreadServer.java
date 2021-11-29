@@ -32,6 +32,7 @@ public class ThreadServer extends Thread{
             try {
                 Pacchetto p=Ricevi();
                 p.address=address;
+                System.out.println(p.ToCsv());
                 Condivisi.Instance().MettiPacchettoIn(p);
             } catch (IOException ex) {
                 Logger.getLogger(ThreadServer.class.getName()).log(Level.SEVERE, null, ex);
