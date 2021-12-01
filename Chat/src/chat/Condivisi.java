@@ -90,12 +90,12 @@ public class Condivisi {
         synchronized(sincronizzaConnessione)
         {
             if(connessioneAttule==null)
+                return StatoConnessione.DisConnesso;
+            else
                 if(miStoConnettendo)
                     return StatoConnessione.InAttessa;  
                 else
-                    return StatoConnessione.DisConnesso;
-            else
-                return StatoConnessione.Connesso;
+                    return StatoConnessione.Connesso;
         }
     }
     public void SettaStatoConnessione(StatoConnessione s)
