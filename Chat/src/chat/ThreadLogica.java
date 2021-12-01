@@ -58,12 +58,13 @@ public class ThreadLogica extends Thread{
                             Invia(new Pacchetto("n",""),daElaborare.address);
                         break;
                     case "d":
+                        Condivisi.Instance().getI().AddMessaggio("utente "+Condivisi.Instance().altroNome+"si è disconnesso");
                         Condivisi.Instance().SettaStatoConnessione(StatoConnessione.DisConnesso);
                         Condivisi.Instance().altroNome="";
                         break;
                     case "m":
                         if(Condivisi.Instance().getStatoConnessione()== StatoConnessione.Connesso  && Condivisi.Instance().getConnessioneAttule().getHostAddress().equals(daElaborare.address.getHostAddress()))
-                            MostraMessaggio(daElaborare.dati);
+                            Condivisi.Instance().getI().AddMessaggio(Condivisi.Instance().altroNome+":"+daElaborare.dati);
                         else
                             Invia(new Pacchetto("d",""),daElaborare.address);
                         break;
@@ -94,11 +95,6 @@ public class ThreadLogica extends Thread{
     private void Invia(Pacchetto p,InetAddress address){
         p.address=address;
         Condivisi.Instance().MettiPacchettoOut(p);
-    }
-
-    private void MostraMessaggio(String dati) {
-        Condivisi.Instance().getI().AddMessaggio(dati);
-        
     }
 
     private Boolean ChiediConferma(InetAddress connessioneAttule, InetAddress address,String nomeAltro) {

@@ -55,6 +55,11 @@ public class Interfaccia extends javax.swing.JFrame {
         TxtDestinatario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         ButConnetti.setText("Connetti");
         ButConnetti.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +182,7 @@ public class Interfaccia extends javax.swing.JFrame {
         {
             Pacchetto p=new Pacchetto("m",Txtmessaggio.getText());
             p.address=Condivisi.Instance().getConnessioneAttule();
-            TxtMessaggi.setText(TxtMessaggi.getText()+"\r\n"+Condivisi.Instance().mioNome+":"+p.dati);
+            TxtMessaggi.setText(TxtMessaggi.getText()+"\r\n"+"Io:"+p.dati);
             Condivisi.Instance().MettiPacchettoOut(p);
             TxtIp.setText("");
         }
@@ -190,6 +195,7 @@ public class Interfaccia extends javax.swing.JFrame {
             p.address=Condivisi.Instance().getConnessioneAttule();
             Condivisi.Instance().MettiPacchettoOut(p);
             Condivisi.Instance().SettaStatoConnessione(StatoConnessione.DisConnesso);
+            TxtMessaggi.setText("");
         }
     }//GEN-LAST:event_DisconnettiActionPerformed
 
@@ -212,6 +218,15 @@ public class Interfaccia extends javax.swing.JFrame {
         Annulla.setVisible(false);
         TxtStatiConnessione.setText("");
     }//GEN-LAST:event_AnnullaActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+         if(Condivisi.Instance().getConnessioneAttule()!=null)
+        {
+            Pacchetto p=new Pacchetto("d","");
+            p.address=Condivisi.Instance().getConnessioneAttule();
+            Condivisi.Instance().MettiPacchettoOut(p);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -268,7 +283,7 @@ public class Interfaccia extends javax.swing.JFrame {
     {
          SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-               TxtMessaggi.setText(TxtMessaggi.getText()+"\r\n"+Condivisi.Instance().altroNome+":"+s);
+               TxtMessaggi.setText(TxtMessaggi.getText()+"\r\n"+s);
             }
         });
     }
